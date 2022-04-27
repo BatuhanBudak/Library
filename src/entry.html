@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library</title>
+  </head>
+  <body>
+    <div class="header">VIRTUAL LIBRARY</div>
+    <button type="button" id="new-book-button">New Book</button>
+    <div class="body">
+      <div class="card-container"></div>
+    </div>
+    <div class="form-popup">
+      <form id="form-container">
+        <fieldset>
+          <legend>New Book</legend>
+          <label for="title"> Title: </label><br />
+          <input type="text" id="title" name="title" required autofocus /><br />
+          <label for="author">Author Name:</label><br />
+          <input type="text" id="author" name="author" required /><br />
+          <label for="pages">Pages:</label><br />
+          <input
+            type="number"
+            id="pages"
+            name="pages"
+            min="1"
+            max="1000"
+            required
+          /><br />
+          <label for="read">Read?</label><br />
+          <input type="checkbox" id="read" name="read" value="Read" /><br />
+          <input
+            class="submit-cancel"
+            type="submit"
+            id="submit"
+            value="Submit"
+          />
+          <button class="submit-cancel" id="cancel" type="cancel">
+            Cancel
+          </button>
+        </fieldset>
+      </form>
+    </div>
+
+    <div class="footer">The Odin Project - Batuhan Budak ❤️</div>
+  </body>
+</html>
