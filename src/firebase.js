@@ -24,6 +24,7 @@ export const fireBaseModule = (() => {
     callbacks: {
       // Called when the user has been successfully signed in.
       signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+        
         if (authResult.user) {
           handleSignedInUser(authResult.user);
         }
@@ -36,7 +37,7 @@ export const fireBaseModule = (() => {
     signInOptions: [
       // Leave the lines as is for the providers you want to offer your users.
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+      firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
       // firebase.auth.GithubAuthProvider.PROVIDER_ID
     ],
     // tosUrl and privacyPolicyUrl accept either url string or a callback
@@ -55,32 +56,39 @@ export const fireBaseModule = (() => {
   ui.start('#firebaseui-auth-container', uiConfig);
   ui.disableAutoSignIn();
 
-  var handleSignedInUser = function(user) {
-    // document.getElementById('user-signed-in').style.display = 'block';
-    // document.getElementById('user-signed-out').style.display = 'none';
-    document.getElementById('name').textContent = user.displayName;
-    if (user.photoURL) {
-      var photoURL = user.photoURL;
-      // Append size to the photo URL for Google hosted images to avoid requesting
-      // the image with its original resolution (using more bandwidth than needed)
-      // when it is going to be presented in smaller size.
-      // if ((photoURL.indexOf('googleusercontent.com') != -1) ||
-      //     (photoURL.indexOf('ggpht.com') != -1)) {
-      //   photoURL = photoURL + '?sz=' +
-      //       document.getElementById('photo').clientHeight;
-      // }
-      document.getElementById('photo').src = photoURL;
-      document.getElementById('photo').style.display = 'block';
-    } else {
-      document.getElementById('photo').style.display = 'none';
-    }
+  const handleSignedInUser = function(user) {
+    
+      document.querySelector(".firebase-container").classList.toggle('hidden');
+      console.log( document.querySelector(".firebase-container"));
+      document.querySelector(".content.hidden").classList.toggle('hidden');
+  
+      // document.getElementById('user-signed-in').style.display = 'block';
+      // document.getElementById('user-signed-out').style.display = 'none';
+      document.getElementById('name').textContent = user.displayName;
+      if (user.photoURL) {
+        let photoURL = user.photoURL;
+        // Append size to the photo URL for Google hosted images to avoid requesting
+        // the image with its original resolution (using more bandwidth than needed)
+        // when it is going to be presented in smaller size.
+        if ((photoURL.indexOf('googleusercontent.com') != -1) ||
+            (photoURL.indexOf('ggpht.com') != -1)) {
+          photoURL = photoURL + '?sz=' +
+              document.getElementById('photo').clientHeight;
+        }
+        document.getElementById('photo').src = photoURL;
+        // document.getElementById('photo').style.display = 'block';
+      } else {
+        document.getElementById('photo').style.display = 'none';
+      }
+    
+  
   };
   
   
   /**
    * Displays the UI for a signed out user.
    */
-  var handleSignedOutUser = function() {
+  const handleSignedOutUser = function() {
     // document.getElementById('user-signed-in').style.display = 'none';
     // document.getElementById('user-signed-out').style.display = 'block';
     // ui.start('#firebaseui-container', uiConfig);
@@ -92,13 +100,13 @@ export const fireBaseModule = (() => {
   firebase.auth().onAuthStateChanged(function(user) {
     document.getElementById('loading').style.display = 'none';
     // document.getElementById('loaded').style.display = 'block';
-    user ? handleSignedInUser(user) : handleSignedOutUser();
+    // user ? handleSignedInUser(user) : handleSignedOutUser();
   });
   
   /**
    * Deletes the user's account.
    */
-  var deleteAccount = function() {
+  const deleteAccount = function() {
     firebase.auth().currentUser.delete().catch(function(error) {
       if (error.code == 'auth/requires-recent-login') {
         // The user's credential is too old. She needs to sign in again.
@@ -113,7 +121,7 @@ export const fireBaseModule = (() => {
     });
   };
   
-  var initApp = function() {
+  const initApp = function() {
   
     document.getElementById('header--sign-button').addEventListener('click', function() {
       firebase.auth().signOut();
