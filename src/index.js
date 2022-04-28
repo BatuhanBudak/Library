@@ -3,6 +3,8 @@ import {fireBaseModule} from './firebase';
 
 
 
+firebaseConfigStart();
+// uiConfigStart();
 let myLibrary = [];
 
 class Book {
