@@ -1,9 +1,8 @@
 import './style.css' 
-import {firebaseConfigStart} from './firebase-config';
-// import {uiConfigStart} from './ui-config';
+import {fireBaseModule} from './firebase';
 
-firebaseConfigStart();
-// uiConfigStart();
+
+
 let myLibrary = [];
 
 class Book {

@@ -8,46 +8,57 @@
     <title>Library</title>
   </head>
   <body>
-    <div class="header">VIRTUAL LIBRARY</div>
-    <button type="button" id="new-book-button">New Book</button>
-    <div class="body">
-      <div class="card-container"></div>
+    <div class="firebase-container">
+      <div id="loading">Loading...</div>
+      <div id="firebaseui-auth-container"></div>
     </div>
-    <div class="form-popup">
-      <form id="form-container">
-        <fieldset>
-          <legend>New Book</legend>
-          <label for="title"> Title: </label><br />
-          <input type="text" id="title" name="title" required autofocus /><br />
-          <label for="author">Author Name:</label><br />
-          <input type="text" id="author" name="author" required /><br />
-          <label for="pages">Pages:</label><br />
-          <input
-            type="number"
-            id="pages"
-            name="pages"
-            min="1"
-            max="1000"
-            required
-          /><br />
-          <label for="read">Read?</label><br />
-          <input type="checkbox" id="read" name="read" value="Read" /><br />
-          <input
-            class="submit-cancel"
-            type="submit"
-            id="submit"
-            value="Submit"
-          />
-          <button class="submit-cancel" id="cancel" type="cancel">
-            Cancel
-          </button>
-        </fieldset>
-      </form>
-    </div>
-    <h1>Welcome to My Awesome App</h1>
-  <div id="firebaseui-auth-container"></div>
-  <div id="loader">Loading...</div>
 
-    <div class="footer">The Odin Project - Batuhan Budak ❤️</div>
+
+    <div class="hidden">
+      <div class="header">
+        <h1 class="header--title">VIRTUAL LIBRARY</h1>
+        <div class="header--user-info">
+          <img src="" alt="user photo" id="photo">
+          <span id="name"></span>
+          <button id="header--sign-button">Sign Out</button>
+        </div>
+      </div>
+      <button type="button" id="new-book-button">New Book</button>
+      <div class="main">
+        <div class="card-container"></div>
+      </div>
+      <div class="form-popup">
+        <form id="form-container">
+          <fieldset>
+            <legend>New Book</legend>
+            <label for="title"> Title: </label><br />
+            <input type="text" id="title" name="title" required autofocus /><br />
+            <label for="author">Author Name:</label><br />
+            <input type="text" id="author" name="author" required /><br />
+            <label for="pages">Pages:</label><br />
+            <input
+              type="number"
+              id="pages"
+              name="pages"
+              min="1"
+              max="1000"
+              required
+            /><br />
+            <label for="read">Read?</label><br />
+            <input type="checkbox" id="read" name="read" value="Read" /><br />
+            <input
+              class="submit-cancel"
+              type="submit"
+              id="submit"
+              value="Submit"
+            />
+            <button class="submit-cancel" id="cancel" type="cancel">
+              Cancel
+            </button>
+          </fieldset>
+        </form>
+      </div>
+      <div class="footer">The Odin Project - Batuhan Budak ❤️</div>
+    </div>
   </body>
 </html>
