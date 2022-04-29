@@ -3,6 +3,7 @@ import { collection,
     addDoc,
     updateDoc,
     deleteDoc,
+    getFirestore,
     doc } from 'firebase/firestore/lite'
 import {fireBaseModule} from './firebase'
 
@@ -14,23 +15,23 @@ export const fireStoreModule = (() => {
     
     const getBooksFromDb = async () => {
       const data = await getDocs(libraryCollectionRef);
-      data.docs.map(doc => ({...doc.data(), id: doc.id}))
+      return data.docs.map(doc => ({...doc.data(), dbId: doc.id}))
     }
-    const createBookFromDb = async () => {
-        await addDoc(libraryCollectionRef, { name: newName, age: Number(newAge) });
+    const createBookInDb = async ({title, author, totalPages, readPages, read}) => {
+        await addDoc(libraryCollectionRef, { title: title, author: author, totalPages:Number(totalPages), readPages:Number(readPages), read:Boolean(read) });
       };
-    
-      const updateBookFromDb = async (id, age) => {
-        const libraryDoc = doc(database, "library", id);
-        const newFields = { age: age + 1 };
-        await updateDoc(libraryDoc, newFields);
-      };
+    //TODO
+    //   const updateBookInDb = async (id, age) => {
+    //     const libraryDoc = doc(database, "library", id);
+    //     const newFields = { age: age + 1 };
+    //     await updateDoc(libraryDoc, newFields);
+    //   };
     
       const deleteBookFromDb = async (id) => {
         const libraryDoc = doc(database, "library", id);
         await deleteDoc(libraryDoc);
       };
 
-      return {getBooksFromDb, createBookFromDb,updateBookFromDb, deleteBookFromDb };
+      return {getBooksFromDb, createBookInDb,deleteBookFromDb };
 
 })();  
