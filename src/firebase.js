@@ -1,7 +1,7 @@
-import { initializeApp } from "firebase/app";
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 import firebase from "firebase/compat/app";
+import {pubsub} from "./pubsub"
 
 export const fireBaseModule = (() => {
   const firebaseConfig = {
