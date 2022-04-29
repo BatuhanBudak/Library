@@ -61,7 +61,8 @@ h3 {
   gap: 1rem;
   align-items: center;
 }
-#header--sign-button {
+#header--signout-button,
+#header--signin-button {
   padding: 0.5rem 1.2rem;
   font-size: 1rem;
   font-family: Roboto;
@@ -83,7 +84,7 @@ h3 {
 .card-container {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, .2fr));
   /* grid-auto-rows: minmax(200px, 1fr); */
   gap: 2rem;
   padding: 2rem;
