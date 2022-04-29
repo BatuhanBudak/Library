@@ -13,6 +13,7 @@ export const uiController = (() => {
     mainContentContainer.classList.remove("hidden");
 
     if (user.isAnonymous) {
+      userName.textContent = "Welcome Guest";
       signOutButton.classList.add("hidden");
       signInButton.classList.remove("hidden");
       userPhoto.style.display = "none";
@@ -37,7 +38,6 @@ export const uiController = (() => {
     }
   };
   const handleSignedOutUser = function () {
-    
     userName.textContent = "Welcome Guest";
     userPhoto.style.display = "none";
     signOutButton.classList.add("hidden");
@@ -50,6 +50,6 @@ export const uiController = (() => {
   };
 
   pubsub.subscribe("userSignedIn", handleSignedInUser);
-  pubsub.subscribe("userSignedOut",handleSignedOutUser );
-  pubsub.subscribe("userreSign", handleResign );
+  pubsub.subscribe("userSignedOut", handleSignedOutUser);
+  pubsub.subscribe("userreSign", handleResign);
 })();

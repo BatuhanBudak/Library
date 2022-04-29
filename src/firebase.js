@@ -2,6 +2,7 @@ import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 import firebase from "firebase/compat/app";
 import {pubsub} from "./pubsub"
+import {} from 'firebase/firestore/lite'
 
 export const fireBaseModule = (() => {
   const firebaseConfig = {

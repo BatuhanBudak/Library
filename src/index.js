@@ -2,7 +2,12 @@ import './style.css'
 import {fireBaseModule} from './firebase';
 import { pubsub } from "./pubsub";
 import {uiController} from "./uiController"
+
 let myLibrary = [];
+
+
+
+
 
 class Book {
   constructor(title, author, pages, read) {
@@ -38,7 +43,8 @@ function handleSubmit(e) {
   );
 
   myLibrary.push(newBook);
-
+  localStorage.setItem("myBooks",JSON.stringify(myLibrary));
+  console.log(JSON.parse(localStorage.getItem("myBooks")));  
   createBookCard(newBook);
 
   formContainer[0].style.display = "none";
@@ -98,5 +104,15 @@ function toggleReadValue(e) {
 function findBookIdByTitle(title) {
   return myLibrary.findIndex((book) => book.title === title);
 }
-  
+
+
+if(localStorage.getItem('myBooks')){
+  const books = JSON.parse(localStorage.getItem('myBooks'))
+  books.forEach(({title,author,pages,read}) => {
+    const book = new Book(title,author,pages,read)
+    createBookCard(book);
+  });
+}else{
+  localStorage.setItem("myBooks",JSON.stringify(myLibrary))
+}  
 
