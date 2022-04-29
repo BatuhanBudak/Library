@@ -8,10 +8,7 @@
     <title>Library</title>
   </head>
   <body>
-    <!-- <div class="firebase-container">
-      <div id="loading">Loading...</div>
-      <div id="firebaseui-auth-container"></div>
-    </div> -->
+    
     <div class="firebase-modal-container">
       <div id="firebaseui-modal-auth-container"></div>
     </div>
@@ -38,11 +35,20 @@
             <input type="text" id="title" name="title" required autofocus /><br />
             <label for="author">Author Name:</label><br />
             <input type="text" id="author" name="author" required /><br />
-            <label for="pages">Pages:</label><br />
+            <label for="totalPages">Total Pages:</label><br />
             <input
               type="number"
-              id="pages"
-              name="pages"
+              id="totalPages"
+              name="totalPages"
+              min="1"
+              max="1000"
+              required
+            /><br />
+            <label for="readPages">Read Pages:</label><br />
+            <input
+              type="number"
+              id="readPages"
+              name="readPages"
               min="1"
               max="1000"
               required
