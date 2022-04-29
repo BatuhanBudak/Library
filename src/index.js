@@ -1,6 +1,7 @@
 import './style.css' 
 import {fireBaseModule} from './firebase';
-
+import { pubsub } from "./pubsub";
+import {uiController} from "./uiController"
 let myLibrary = [];
 
 class Book {
@@ -56,9 +57,9 @@ function createBookCard(newBook) {
   const cardDeleteButton = document.createElement("button");
   const cardReadButton = document.createElement("button");
 
-  titleHeader.textContent = newBook.title;
-  authorHeader.textContent = newBook.author;
-  pagesHeader.textContent = newBook.pages;
+  titleHeader.textContent = "Book: " + newBook.title;
+  authorHeader.textContent = "Author: " + newBook.author;
+  pagesHeader.textContent = "Pages: "+ newBook.pages;
   cardReadButton.textContent = newBook.read.checked ? `Read` : `Not read`;
   cardDeleteButton.textContent = "Remove";
 

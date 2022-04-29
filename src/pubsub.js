@@ -23,6 +23,6 @@ export const pubsub = {
       }
     }
   };
-  
-  pubsub.subscribe("playerBoardPopulated", renderPlayerBoardForStart);
-  pubsub.publish('shipSinked', id);
+
+//   pubsub.subscribe("playerBoardPopulated", renderPlayerBoardForStart);
+//   pubsub.publish('shipSinked', id);

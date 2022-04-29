@@ -62,71 +62,33 @@ export const fireBaseModule = (() => {
   let ui = new firebaseui.auth.AuthUI(firebase.auth());
   // The start method will wait until the DOM is loaded.
   // ui.disableAutoSignIn();
-  ui.start("#firebaseui-auth-container", uiConfig);
+  ui.start("#firebaseui-modal-auth-container", uiConfig);
   ui.disableAutoSignIn();
 
   const handleSignedInUser = function (user) {
-    document.querySelector(".firebase-container").classList.toggle("hidden");
-    document.querySelector(".content.hidden").classList.toggle("hidden");
-
-    if (user.isAnonymous) {
-      document
-        .getElementById("header--signout-button")
-        .classList.toggle("hidden");
-      document
-        .getElementById("header--signin-button")
-        .classList.toggle("hidden");
-        document.getElementById("photo").style.display = "none";
-    } else {
-      document.getElementById("name").textContent = user.displayName;
-      if (user.photoURL) {
-        let photoURL = user.photoURL;
-        // Append size to the photo URL for Google hosted images to avoid requesting
-        // the image with its original resolution (using more bandwidth than needed)
-        // when it is going to be presented in smaller size.
-        if (
-          photoURL.indexOf("googleusercontent.com") != -1 ||
-          photoURL.indexOf("ggpht.com") != -1
-        ) {
-          photoURL =
-            photoURL + "?sz=" + document.getElementById("photo").clientHeight;
-        }
-        document.getElementById("photo").src = photoURL;
-        // document.getElementById('photo').style.display = 'block';
-      } else {
-        document.getElementById("photo").style.display = "none";
-      }
-    }
+    pubsub.publish("userSignedIn", user);
   };
 
-  const handleResign = () => {
-    ui.start("#firebaseui-auth-container", uiConfig);
-    document.querySelector(".firebase-container").classList.toggle("hidden");
+  const handleResign = (user) => {
+    ui.start("#firebaseui-modal-auth-container", uiConfig);
+    // user ? handleSignedInUser(user) : handleSignedOutUser();
+    pubsub.publish("userreSign");
+    
   };
 
   /**
    * Displays the UI for a signed out user.
    */
   const handleSignedOutUser = function () {
-    // document.getElementById('user-signed-in').style.display = 'none';
-    // document.getElementById('user-signed-out').style.display = 'block';
-    // ui.start('#firebaseui-container', uiConfig);
     firebase.auth().signOut();
-    document.getElementById("name").textContent = "Welcome Guest";
-    document.getElementById("photo").style.display = "none";
-    document
-      .getElementById("header--signout-button")
-      .classList.toggle("hidden");
-    document.getElementById("header--signin-button").classList.toggle("hidden");
+    pubsub.publish("userSignedOut");
+    
   };
 
   // Listen to change in auth state so it displays the correct UI for when
   // the user is signed in or not.
-  firebase.auth().onAuthStateChanged(function (user) {
-    document.getElementById("loading").style.display = "none";
-    // document.getElementById('loaded').style.display = 'block';
-    // user ? handleSignedInUser(user) : handleSignedOutUser();
-  });
+
+  // firebase.auth().onAuthStateChanged((user) => handleResign(user));
 
   /**
    * Deletes the user's account.
