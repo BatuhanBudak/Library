@@ -17,8 +17,8 @@ export const fireStoreModule = (() => {
       const data = await getDocs(libraryCollectionRef);
       return data.docs.map(doc => ({...doc.data(), dbId: doc.id}))
     }
-    const createBookInDb = async ({title, author, totalPages, readPages, read}) => {
-        await addDoc(libraryCollectionRef, { title: title, author: author, totalPages:Number(totalPages), readPages:Number(readPages), read:Boolean(read) });
+    const createBookInDb = async (title, author, totalPages, readPages, read, id) => {
+        await addDoc(libraryCollectionRef, { title: title, author: author, totalPages:Number(totalPages), readPages:Number(readPages), read:Boolean(read), id:id });
       };
     //TODO
     //   const updateBookInDb = async (id, age) => {

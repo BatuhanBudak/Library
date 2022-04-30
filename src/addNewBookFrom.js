@@ -1,5 +1,6 @@
 import { pubsub } from "./pubsub";
 import { bookCard } from "./bookCard";
+import { nanoid } from "nanoid";
 export const addNewBookForm = (() => {
   const formContainer = document.getElementsByClassName("form-popup");
   const addBookButton = document.getElementById("new-book-button");
@@ -16,7 +17,8 @@ export const addNewBookForm = (() => {
         author: form.author.value,
         totalPages: form.totalPages.value,
         readPages: form.readPages.value,
-        read: form.read.checked}
+        read: form.read.checked,
+        id: nanoid()}
     pubsub.publish("newBookCreated",newBook);
     formContainer[0].style.display = "none";
     form.reset();

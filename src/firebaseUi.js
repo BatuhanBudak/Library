@@ -3,7 +3,7 @@ import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 import { pubsub } from "./pubsub";
 
-const firebaseUiModule = (() => {
+export const firebaseUiModule = (() => {
   let uiConfig = {
     callbacks: {
       // Called when the user has been successfully signed in.
@@ -41,6 +41,7 @@ const firebaseUiModule = (() => {
     pubsub.publish("userSignedOut");
   };
   /**
+   * TODO
    * Deletes the user's account.
    */
   const deleteAccount = function () {

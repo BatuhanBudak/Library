@@ -10,19 +10,22 @@ export const bookCard = (() => {
       
         const titleHeader = document.createElement("h3");
         const authorHeader = document.createElement("h3");
-        const pagesHeader = document.createElement("h3");
+        const totalPagesHeader = document.createElement("h3");
+        const readPagesHeader = document.createElement("h3");
         const cardDeleteButton = document.createElement("button");
         const cardReadButton = document.createElement("button");
       
         titleHeader.textContent = "Book: " + newBook.title;
         authorHeader.textContent = "Author: " + newBook.author;
-        pagesHeader.textContent = "Pages: "+ newBook.pages;
+        totalPagesHeader.textContent = "Total Pages: "+ newBook.totalPages;
+        readPagesHeader.textContent = "Read Pages: "+ newBook.readPages;
         cardReadButton.textContent = newBook.read.checked ? `Read` : `Not read`;
         cardDeleteButton.textContent = "Remove";
       
         newCard.appendChild(titleHeader);
         newCard.appendChild(authorHeader);
-        newCard.appendChild(pagesHeader);
+        newCard.appendChild(totalPagesHeader);
+        newCard.appendChild(readPagesHeader);
         newCard.appendChild(cardDeleteButton);
         newCard.appendChild(cardReadButton);
         newCard.appendChild(cardDeleteButton);
