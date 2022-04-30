@@ -10,7 +10,7 @@ export const dataManager = (() => {
       const books = JSON.parse(localStorage.getItem("myBooks"));
       books.forEach(({ title, author, totalPages, readPages, read, id }) => {
         
-        const book = new Book(title, author, Number(totalPages),Number(readPages), read,id);
+        const book = new Book(title, author, Number(totalPages),Number(readPages), Boolean(read),id);
         bookCard.createBookCard(book);
       });
     } else {
@@ -18,20 +18,20 @@ export const dataManager = (() => {
     }
   };
 
-  const handleSignedInUserData = (user) => {
+  const handleSignedInUserData = async (user) => {
     if (user.isAnonymous) {
       handleAnonymousUserSignIn();
     } else {
-      const books = fireStoreModule.getBooksFromDb();
-      books.forEach(({title, author, pages, read,id}) => {
-        const book = new Book(title, author, pages, read,id);
+      const books = await fireStoreModule.getBooksFromDb();
+      books.forEach(({title, author, totalPages,readPages, read,id}) => {
+        const book = new Book(title, author, totalPages, readPages, read,id);
         bookCard.createBookCard(book);
       });
     }
   };
   const handleNewBook = ({ title, author, totalPages, readPages, read,id }) => {
     if (firebase.auth().currentUser.isAnonymous) {
-      const oldBooks = localStorage.getItem("myBooks");
+      const oldBooks = JSON.parse(localStorage.getItem("myBooks"));
       const newBooks = [...oldBooks,{title:title, author:author, totalPages:totalPages, readPages:readPages, read:read,id:id}]
       //TODO
       localStorage.setItem(
@@ -49,13 +49,14 @@ export const dataManager = (() => {
       );
     }
   };
-  const handleRemoveBook = (id) => {
+  const handleRemoveBook = async (id) => {
     if (firebase.auth().currentUser.isAnonymous) {
         const books = JSON.parse(localStorage.getItem("myBooks"));
         const newBooks = [...books].filter(book => book.id !== id);
         localStorage.setItem("myBooks", JSON.stringify(newBooks));
     }else{
-            const allBooks = fireStoreModule.getBooksFromDb();
+            const allBooks = await fireStoreModule.getBooksFromDb();
+            console.log(allBooks);
             const bookToDelete = allBooks.find(book => book.id === id );
             fireStoreModule.deleteBookFromDb(bookToDelete.dbId);
     }
