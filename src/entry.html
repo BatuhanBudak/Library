@@ -50,7 +50,7 @@
               id="totalPages"
               name="totalPages"
               min="1"
-              max="1000"
+              max="10000"
               required
             /><br />
             <label for="readPages">Read Pages:</label><br />
@@ -59,7 +59,7 @@
               id="readPages"
               name="readPages"
               min="1"
-              max="1000"
+              max="10000"
               required
             /><br />
             <label for="read">Read?</label><br />
@@ -71,6 +71,46 @@
               value="Submit"
             />
             <button class="submit-cancel" id="cancel" type="cancel">
+              Cancel
+            </button>
+          </fieldset>
+        </form>
+      </div>
+      <div class="edit-book-modal hidden">
+        <form id="edit-book-modal--form">
+          <fieldset>
+            <legend>Edit Book</legend>
+            <label for="edit-book-title"> Title: </label><br />
+            <input type="text" id="edit-book-title" name="editBookTitle" required autofocus /><br />
+            <label for="edit-book-author">Author:</label><br />
+            <input type="text" id="edit-book-author" name="editBookAuthor" required /><br />
+            <label for="edit-book-totalPages">Total Pages:</label><br />
+            <input
+              type="number"
+              id="edit-book-totalPages"
+              name="editBookTotalPages"
+              min="1"
+              max="10000"
+              required
+            /><br />
+            <label for="edit-book-readPages">Read Pages:</label><br />
+            <input
+              type="number"
+              id="edit-book-readPages"
+              name="editBookReadPages"
+              min="1"
+              max="10000"
+              required
+            /><br />
+            <label for="edit-book-read">Read?</label><br />
+            <input type="checkbox" id="edit-book-read" name="editBookRead" value="Read" /><br />
+            <button class="edit-book-submit-cancel"
+            type="submit"
+            id="edit-book-submit-button"
+            value="Submit">
+              Submit
+            </button>
+            <button class="edit-book-submit-cancel" id="edit-book-cancel-button" type="cancel">
               Cancel
             </button>
           </fieldset>

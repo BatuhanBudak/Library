@@ -18,7 +18,7 @@ export const dataManager = (() => {
     }
   };
 
-  const handleSignedInUserData = async (user) => {
+  const handleSignedInUserData = async () => {
     
       const books = await fireStoreModule.getBooksFromDb();
       books.forEach(({title, author, totalPages,readPages, read,id}) => {
@@ -54,17 +54,22 @@ export const dataManager = (() => {
         localStorage.setItem("myBooks", JSON.stringify(newBooks));
     }else{
             const allBooks = await fireStoreModule.getBooksFromDb();
-            console.log(allBooks);
             const bookToDelete = allBooks.find(book => book.id === id );
             fireStoreModule.deleteBookFromDb(bookToDelete.dbId);
     }
   }
+  const handleSignedOutUser = () => {
+    handleLocalUserSignIn();
+  }
+
+  const handleResign = () => {
+    handleSignedInUserData();
+  }
 
   pubsub.subscribe("userSignedIn", handleSignedInUserData);
   pubsub.subscribe("localUserSignedIn", handleLocalUserSignIn);
-    //TODO
-  // pubsub.subscribe("userSignedOut", handleSignedOutUser);
-  // pubsub.subscribe("userreSign", handleResign);
+  pubsub.subscribe("userSignedOut", handleSignedOutUser);
+  pubsub.subscribe("userreSign", handleResign);
   pubsub.subscribe("newBookCreated", handleNewBook);
   pubsub.subscribe("cardRemoved", handleRemoveBook);
 })();

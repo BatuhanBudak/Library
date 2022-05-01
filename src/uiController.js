@@ -1,9 +1,7 @@
 import { pubsub } from "./pubsub";
 
 export const uiController = (() => {
-  const signInModalContainer = document.querySelector(
-    ".sign-in-modal"
-  );
+  const signInModalContainer = document.querySelector(".sign-in-modal");
   const signInLocalButton = document.querySelector(
     ".sign-in-modal--local-button"
   );
@@ -12,14 +10,14 @@ export const uiController = (() => {
   );
   const firebaseContainer = document.querySelector(".firebase-modal-container");
   const mainContentContainer = document.querySelector(".content.hidden");
-  const bookCardContainer = document.querySelector(".card-container");
   const signOutButton = document.getElementById("header--signout-button");
   const signInButton = document.getElementById("header--signin-button");
   const userPhoto = document.getElementById("header--photo");
   const userName = document.getElementById("header--name");
+  const editBookFormModal = document.querySelector(".edit-book-modal");
+  const editBookForm = document.getElementById("edit-book-modal--form");
 
-  function handleLocalUserSignIn(){
-    console.log('test');
+  function handleLocalUserSignIn() {
     signInModalContainer.classList.add("hidden");
     mainContentContainer.classList.remove("hidden");
     clearCardContainer();
@@ -27,11 +25,10 @@ export const uiController = (() => {
     signOutButton.classList.add("hidden");
     signInButton.classList.remove("hidden");
     userPhoto.style.display = "none";
-    pubsub.publish('localUserSignedIn');
-  };
+    pubsub.publish("localUserSignedIn");
+  }
 
-  function showFirebaseUIModal(){
-    console.log('test');
+  function showFirebaseUIModal() {
     signInModalContainer.classList.add("hidden");
     firebaseContainer.classList.remove("hidden");
   }
@@ -63,20 +60,40 @@ export const uiController = (() => {
     userPhoto.style.display = "none";
     signOutButton.classList.add("hidden");
     signInButton.classList.remove("hidden");
+    clearCardContainer();
   };
   const handleResign = () => {
     firebaseContainer.classList.toggle("hidden");
     signOutButton.classList.remove("hidden");
     signInButton.classList.add("hidden");
+    clearCardContainer();
   };
 
   const clearCardContainer = () => {
     const allCards = document.querySelectorAll(".card");
     allCards.forEach((card) => card.remove());
   };
+
+ 
+
+  const openBookEditForm = () => {
+    editBookFormModal.classList.remove("hidden");
+   
+  };
+
+  const closeBookEditForm = () => {
+    editBookFormModal.classList.add("hidden");
+   
+  };
+
   signInLocalButton.addEventListener("click", handleLocalUserSignIn);
-  signInCloudButton.addEventListener('click', showFirebaseUIModal);
+  signInCloudButton.addEventListener("click", showFirebaseUIModal);
   pubsub.subscribe("userSignedIn", handleSignedInUser);
   pubsub.subscribe("userSignedOut", handleSignedOutUser);
   pubsub.subscribe("userreSign", handleResign);
+  pubsub.subscribe("editCardClicked", openBookEditForm);
+  pubsub.subscribe("cardEditComplete", closeBookEditForm);
+  
 })();
+
+

@@ -14,6 +14,7 @@ export const bookCard = (() => {
         const readPagesHeader = document.createElement("h3");
         const cardDeleteButton = document.createElement("button");
         const cardReadButton = document.createElement("button");
+        const cardEditButton = document.createElement('button');
       
         titleHeader.textContent = "Book: " + newBook.title;
         authorHeader.textContent = "Author: " + newBook.author;
@@ -21,20 +22,21 @@ export const bookCard = (() => {
         readPagesHeader.textContent = "Read Pages: "+ newBook.readPages;
         cardReadButton.textContent = newBook.read.checked ? `Read` : `Not read`;
         cardDeleteButton.textContent = "Remove";
+        cardEditButton.textContent= 'Edit ';
       
         newCard.appendChild(titleHeader);
         newCard.appendChild(authorHeader);
         newCard.appendChild(totalPagesHeader);
         newCard.appendChild(readPagesHeader);
-        newCard.appendChild(cardDeleteButton);
         newCard.appendChild(cardReadButton);
+        newCard.appendChild(cardEditButton);
         newCard.appendChild(cardDeleteButton);
-        newCard.appendChild(cardReadButton);
         cardContainer.appendChild(newCard);
       
         //TODO
-        // cardReadButton.addEventListener("click", toggleReadValue);
+        // cardReadButton.addEventListener("click", editCard);
         cardDeleteButton.addEventListener("click", removeCard);
+        cardEditButton.addEventListener("click", editCardClicked);
       }
 
       
@@ -44,16 +46,26 @@ export const bookCard = (() => {
         pubsub.publish("cardRemoved",parentNode.id)
         parentNode.remove();
       }
-      //TODO
-    //   function toggleReadValue(e) {
-    //     const parentNodeId = e.target.parentNode.id;
-    //     myLibrary[parentNodeId].read
-    //       ? (e.target.textContent = "Not Read")
-    //       : (e.target.textContent = "Read");
-    //     myLibrary[parentNodeId].read = !myLibrary[parentNodeId].read;
-    //   }
+     
+      function editCardClicked(e) {
+        const parentNodeId = e.target.parentNode.id;
+        pubsub.publish('editCardClicked', parentNodeId);
+       
+      }
+      function editCardComplete({cardId,title,
+        author,
+        totalPages,
+        readPages,
+        read,}){
+          const card = document.getElementById(cardId);
+          card.children[0].textContent = "Book: " + title;
+          card.children[1].textContent = "Book: " + author;
+          card.children[2].textContent = "Book: " + totalPages;
+          card.children[3].textContent = "Book: " + readPages;
+          card.children[4].checked = read ? `Read` : `Not read`;
+      }
      
      
-
+      pubsub.subscribe('cardEditComplete',editCardComplete );
       return {createBookCard}
 })()

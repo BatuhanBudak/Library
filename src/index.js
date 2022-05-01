@@ -8,7 +8,7 @@ import { bookCard } from './bookCard';
 import { dataManager } from './dataManager';
 import {firebaseUiModule} from './firebaseUi'
 import {fireStoreModule} from './firestore'
-
+import { editBookFormModule } from './editBookForm';
 
 
 
