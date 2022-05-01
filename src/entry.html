@@ -8,8 +8,17 @@
     <title>Library</title>
   </head>
   <body>
-    
-    <div class="firebase-modal-container">
+    <div class="sign-in-modal"> 
+      <div class="sign-in-modal-content">
+            <h3 class="sign-in-modal-title">Where do you want to save your data?</h3>
+            <div class="sign-in-modal--buttons-container">
+            <button class="sign-in-modal--local-button">Local</button>
+            <button class="sign-in-modal--cloud-button">Cloud</button>
+      </div>
+    </div>
+  </div>
+
+    <div class="firebase-modal-container hidden">
       <div id="firebaseui-modal-auth-container"></div>
     </div>
 

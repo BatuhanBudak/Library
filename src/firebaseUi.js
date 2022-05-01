@@ -19,7 +19,7 @@ export const firebaseUiModule = (() => {
     signInOptions: [
       // Leave the lines as is for the providers you want to offer your users.
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
+      // firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
     ],
     tosUrl: "https://www.google.com",
     privacyPolicyUrl: "https://www.google.com",
@@ -37,6 +37,7 @@ export const firebaseUiModule = (() => {
     pubsub.publish("userreSign");
   };
   const handleSignedOutUser = function () {
+    //TODO SIGN IN VE SIGN OUT SONUCUNA GORE STORAGE VE UI GUNCELLENECEK
     firebase.auth().signOut();
     pubsub.publish("userSignedOut");
   };

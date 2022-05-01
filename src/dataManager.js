@@ -5,7 +5,7 @@ import Book from "./Book";
 import { bookCard } from "./bookCard";
 
 export const dataManager = (() => {
-  const handleAnonymousUserSignIn = () => {
+  const handleLocalUserSignIn = () => {
     if (localStorage.getItem("myBooks")) {
       const books = JSON.parse(localStorage.getItem("myBooks"));
       books.forEach(({ title, author, totalPages, readPages, read, id }) => {
@@ -19,18 +19,16 @@ export const dataManager = (() => {
   };
 
   const handleSignedInUserData = async (user) => {
-    if (user.isAnonymous) {
-      handleAnonymousUserSignIn();
-    } else {
+    
       const books = await fireStoreModule.getBooksFromDb();
       books.forEach(({title, author, totalPages,readPages, read,id}) => {
         const book = new Book(title, author, totalPages, readPages, read,id);
         bookCard.createBookCard(book);
       });
-    }
+    
   };
   const handleNewBook = ({ title, author, totalPages, readPages, read,id }) => {
-    if (firebase.auth().currentUser.isAnonymous) {
+    if (!firebase.auth().currentUser) {
       const oldBooks = JSON.parse(localStorage.getItem("myBooks"));
       const newBooks = [...oldBooks,{title:title, author:author, totalPages:totalPages, readPages:readPages, read:read,id:id}]
       //TODO
@@ -50,7 +48,7 @@ export const dataManager = (() => {
     }
   };
   const handleRemoveBook = async (id) => {
-    if (firebase.auth().currentUser.isAnonymous) {
+    if (!firebase.auth().currentUser) {
         const books = JSON.parse(localStorage.getItem("myBooks"));
         const newBooks = [...books].filter(book => book.id !== id);
         localStorage.setItem("myBooks", JSON.stringify(newBooks));
@@ -63,7 +61,8 @@ export const dataManager = (() => {
   }
 
   pubsub.subscribe("userSignedIn", handleSignedInUserData);
-  //TODO
+  pubsub.subscribe("localUserSignedIn", handleLocalUserSignIn);
+    //TODO
   // pubsub.subscribe("userSignedOut", handleSignedOutUser);
   // pubsub.subscribe("userreSign", handleResign);
   pubsub.subscribe("newBookCreated", handleNewBook);
