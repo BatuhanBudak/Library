@@ -19,7 +19,6 @@ export const fireStoreModule = (() => {
       ...doc.data(),
       dbId: doc.id,
     }));
-    console.log(returnedData);
     return returnedData;
   };
   const createBookInDb = async (
@@ -39,17 +38,29 @@ export const fireStoreModule = (() => {
       id: id,
     });
   };
-  // TODO
-  //   const updateBookInDb = async (id, age) => {
-  //     const libraryDoc = doc(database, "library", id);
-  //     const newFields = { age: age + 1 };
-  //     await updateDoc(libraryDoc, newFields);
-  //   };
+  const updateBookInDb = async (
+    bookToDUpdateId,
+    title,
+    author,
+    totalPages,
+    readPages,
+    read,
+  ) => {
+    const libraryDoc = doc(database, "library", bookToDUpdateId);
+    const newFields = {
+      title: title,
+      author: author,
+      totalPages: Number(totalPages),
+      readPages: Number(readPages),
+      read: Boolean(read),
+    };
+    await updateDoc(libraryDoc, newFields);
+  };
 
   const deleteBookFromDb = async (id) => {
     const libraryDoc = doc(database, "library", id);
     await deleteDoc(libraryDoc);
   };
 
-  return { getBooksFromDb, createBookInDb, deleteBookFromDb };
+  return { getBooksFromDb, createBookInDb, deleteBookFromDb, updateBookInDb };
 })();

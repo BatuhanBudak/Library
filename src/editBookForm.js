@@ -53,13 +53,9 @@ export const editBookFormModule = (() => {
   const handleEditBookFormSubmit = (e) => {
     if (e.submitter === editBookFormCancelButton) return;
     e.preventDefault();
-    console.log(e.target);
     const cardId = editBookForm.getAttribute("data-id");
     const allCards = document.querySelectorAll(".card");
     const cardToEditId = [...allCards].find((card) => card.id === cardId).id;
-    // console.log(editBookForm);
-    const formData = new FormData(e.target);
-    // console.log(formData);
     const editedBookInfo = {
       title: editBookForm.editBookTitle.value,
       author: editBookForm.editBookAuthor.value,

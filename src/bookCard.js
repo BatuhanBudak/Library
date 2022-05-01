@@ -56,7 +56,7 @@ export const bookCard = (() => {
         author,
         totalPages,
         readPages,
-        read,}){
+        read}){
           const card = document.getElementById(cardId);
           card.children[0].textContent = "Book: " + title;
           card.children[1].textContent = "Book: " + author;
