@@ -93,6 +93,7 @@ export const uiController = (() => {
   pubsub.subscribe("userreSign", handleResign);
   pubsub.subscribe("editCardClicked", openBookEditForm);
   pubsub.subscribe("cardEditComplete", closeBookEditForm);
+  pubsub.subscribe("hideEditBookModalClicked", closeBookEditForm);
   
 })();
 

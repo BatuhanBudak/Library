@@ -34,11 +34,13 @@ export const firebaseUiModule = (() => {
   };
   const handleResign = () => {
     ui.start("#firebaseui-modal-auth-container", uiConfig);
+    ui.disableAutoSignIn();
     pubsub.publish("userreSign");
   };
   const handleSignedOutUser = function () {
     //TODO SIGN IN VE SIGN OUT SONUCUNA GORE STORAGE VE UI GUNCELLENECEK
     firebase.auth().signOut();
+    // deleteAccount();
     pubsub.publish("userSignedOut");
   };
   /**

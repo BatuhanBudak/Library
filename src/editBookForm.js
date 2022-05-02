@@ -1,6 +1,7 @@
 import { pubsub } from "./pubsub";
 
 export const editBookFormModule = (() => {
+  const editBookModal = document.querySelector(".edit-book-modal");
   const editBookForm = document.getElementById("edit-book-modal--form");
   const editBookFormTitle = document.getElementById("edit-book-title");
   const editBookFormAuthor = document.getElementById("edit-book-author");
@@ -31,8 +32,8 @@ export const editBookFormModule = (() => {
     return filteredText;
   }
   const getReadValueFromCard = (cardToEdit) => {
-    const readValue = cardToEdit.children[4].textContent;
-    return readValue === "read" ? true : false;
+    const readValue = cardToEdit.children[4].textContent === "Read" ? true : false;
+    return readValue;
   };
 
   const populateEditFormValues = (cardId) => {
@@ -70,7 +71,11 @@ export const editBookFormModule = (() => {
     });
     editBookForm.reset();
   };
-
+  const hideEditBookModalClicked = (e) => {
+    e.preventDefault();
+    pubsub.publish("hideEditBookModalClicked");
+  }
   pubsub.subscribe("editCardClicked", populateEditFormValues);
   editBookForm.addEventListener("submit", handleEditBookFormSubmit);
+  editBookFormCancelButton.addEventListener('click', hideEditBookModalClicked)
 })();

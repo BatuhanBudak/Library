@@ -52,7 +52,6 @@ export const dataManager = (() => {
           id: id,
         },
       ];
-      //TODO
       localStorage.setItem("myBooks", JSON.stringify(newBooks));
     } else {
       fireStoreModule.createBookInDb(
@@ -76,6 +75,70 @@ export const dataManager = (() => {
       fireStoreModule.deleteBookFromDb(bookToDelete.dbId);
     }
   };
+  const handleEditReadValue = async ({id, readValue}) => {
+    if (!firebase.auth().currentUser) {
+      const allBooks = JSON.parse(localStorage.getItem("myBooks"));
+      const editedBooks = [...allBooks].map((book) => {
+        if (book.id === id) {
+          return {
+            ...book,
+           read: !readValue,
+          };
+        } else {
+          return book;
+        }
+      });
+      console.log(editedBooks);
+      localStorage.setItem("myBooks", JSON.stringify(editedBooks));
+    }else{
+      const allBooks = await fireStoreModule.getBooksFromDb();
+      const bookToDUpdateId = allBooks.find((book) => book.id === id).dbId;
+      await fireStoreModule.updateBookReadValueInDb(
+        bookToDUpdateId,
+        !readValue
+      );
+    }
+    
+  };
+
+  async function editBookInDb(
+    bookId,
+    title,
+    author,
+    totalPages,
+    readPages,
+    read
+  ) {
+    const allBooks = await fireStoreModule.getBooksFromDb();
+    const bookToDUpdateId = allBooks.find((book) => book.id === bookId).dbId;
+    await fireStoreModule.updateBookInDb(
+      bookToDUpdateId,
+      title,
+      author,
+      totalPages,
+      readPages,
+      read
+    );
+  }
+
+  function editLocalBook(bookId, title, author, totalPages, readPages, read) {
+    const allBooks = JSON.parse(localStorage.getItem("myBooks"));
+    const editedBooks = [...allBooks].map((book) => {
+      if (book.id === bookId) {
+        return {
+          ...book,
+          title: title,
+          author: author,
+          totalPages: totalPages,
+          readPages: readPages,
+          read: read,
+        };
+      } else {
+        return book;
+      }
+    });
+    localStorage.setItem("myBooks", JSON.stringify(editedBooks));
+  }
 
   const handleEditBook = async ({
     cardId: bookId,
@@ -86,32 +149,12 @@ export const dataManager = (() => {
     read,
   }) => {
     if (!firebase.auth().currentUser) {
-      const allBooks = JSON.parse(localStorage.getItem("myBooks"));
-      const editedBooks = [...allBooks].map((book) => {
-        if (book.id === bookId) {
-          return {
-            ...book,
-            title: title,
-            author: author,
-            totalPages: totalPages,
-            readPages: readPages,
-            read: read,
-          };
-        } else {
-          return book;
-        }
-      });
-      localStorage.setItem("myBooks", JSON.stringify(editedBooks));
-    }else{
-      const allBooks = await fireStoreModule.getBooksFromDb();
-      const bookToDUpdateId = allBooks.find((book) => book.id === bookId).dbId;
-     await fireStoreModule.updateBookInDb(bookToDUpdateId,title,
-        author,
-        totalPages,
-        readPages,
-        read);
+      editLocalBook(bookId, title, author, totalPages, readPages, read);
+    } else {
+      await editBookInDb(bookId, title, author, totalPages, readPages, read);
     }
   };
+
   const handleSignedOutUser = () => {
     handleLocalUserSignIn();
   };
@@ -127,4 +170,5 @@ export const dataManager = (() => {
   pubsub.subscribe("newBookCreated", handleNewBook);
   pubsub.subscribe("cardRemoved", handleRemoveBook);
   pubsub.subscribe("cardEditComplete", handleEditBook);
+  pubsub.subscribe("readValueEdited", handleEditReadValue);
 })();

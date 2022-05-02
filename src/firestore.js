@@ -56,11 +56,21 @@ export const fireStoreModule = (() => {
     };
     await updateDoc(libraryDoc, newFields);
   };
+  const updateBookReadValueInDb = async (
+    bookToDUpdateId,
+   read,
+  ) => {
+    const libraryDoc = doc(database, "library", bookToDUpdateId);
+    const newReadValue = {
+        read: Boolean(read),
+    };
+    await updateDoc(libraryDoc, newReadValue);
+  };
 
   const deleteBookFromDb = async (id) => {
     const libraryDoc = doc(database, "library", id);
     await deleteDoc(libraryDoc);
   };
 
-  return { getBooksFromDb, createBookInDb, deleteBookFromDb, updateBookInDb };
+  return { getBooksFromDb, createBookInDb, deleteBookFromDb, updateBookInDb, updateBookReadValueInDb };
 })();

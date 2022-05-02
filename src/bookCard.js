@@ -20,9 +20,9 @@ export const bookCard = (() => {
         authorHeader.textContent = "Author: " + newBook.author;
         totalPagesHeader.textContent = "Total Pages: "+ newBook.totalPages;
         readPagesHeader.textContent = "Read Pages: "+ newBook.readPages;
-        cardReadButton.textContent = newBook.read.checked ? `Read` : `Not read`;
+        cardReadButton.textContent = newBook.read ? `Read` : `Not read`;
         cardDeleteButton.textContent = "Remove";
-        cardEditButton.textContent= 'Edit ';
+        cardEditButton.textContent= 'Edit';
       
         newCard.appendChild(titleHeader);
         newCard.appendChild(authorHeader);
@@ -34,15 +34,19 @@ export const bookCard = (() => {
         cardContainer.appendChild(newCard);
       
         //TODO
-        // cardReadButton.addEventListener("click", editCard);
+        cardReadButton.addEventListener("click", editReadValue);
         cardDeleteButton.addEventListener("click", removeCard);
         cardEditButton.addEventListener("click", editCardClicked);
       }
-
-      
+      //TODO
+      function editReadValue(e){
+        const card = document.getElementById(e.target.parentNode.id);
+        const buttonValue = card.children[4].textContent === 'Read' ? true : false;
+        card.children[4].textContent = buttonValue ? `Not read`: `Read`;
+        pubsub.publish("readValueEdited", {id: card.id, readValue:buttonValue });
+      }
       function removeCard(e) {
         const parentNode = e.target.parentNode;
-        // myLibrary.splice(parentNode.id, 1);
         pubsub.publish("cardRemoved",parentNode.id)
         parentNode.remove();
       }
@@ -59,10 +63,10 @@ export const bookCard = (() => {
         read}){
           const card = document.getElementById(cardId);
           card.children[0].textContent = "Book: " + title;
-          card.children[1].textContent = "Book: " + author;
-          card.children[2].textContent = "Book: " + totalPages;
-          card.children[3].textContent = "Book: " + readPages;
-          card.children[4].checked = read ? `Read` : `Not read`;
+          card.children[1].textContent = "Author: " + author;
+          card.children[2].textContent = "Total Pages: " + totalPages;
+          card.children[3].textContent = "Read Pages: " + readPages;
+          card.children[4].textContent = read ? `Read` : `Not read`;
       }
      
      
