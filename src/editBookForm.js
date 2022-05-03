@@ -22,7 +22,7 @@ export const editBookFormModule = (() => {
 
   function getChildrenTextFromCard(cardToEdit) {
     const childrenText = [...cardToEdit.children]
-      .slice(0, 4)
+      .slice(1, 5)
       .map((child) => child.textContent);
     const filteredText = childrenText.map((child) => {
       const semiColonIndex = child.indexOf(":");
@@ -32,7 +32,7 @@ export const editBookFormModule = (() => {
     return filteredText;
   }
   const getReadValueFromCard = (cardToEdit) => {
-    const readValue = cardToEdit.children[4].textContent === "Read" ? true : false;
+    const readValue = cardToEdit.children[5].children[1].textContent === "Read" ? true : false;
     return readValue;
   };
 

@@ -1,5 +1,5 @@
 import { pubsub } from "./pubsub";
-
+import firebase from "firebase/compat/app";
 export const uiController = (() => {
   const signInModalContainer = document.querySelector(".sign-in-modal");
   const signInLocalButton = document.querySelector(
@@ -15,9 +15,11 @@ export const uiController = (() => {
   const userPhoto = document.getElementById("header--photo");
   const userName = document.getElementById("header--name");
   const editBookFormModal = document.querySelector(".edit-book-modal");
-  const editBookForm = document.getElementById("edit-book-modal--form");
+  const addBookButton = document.getElementById("new-book-button");
+  const showLibraryInfoButton = document.getElementById("library-info-button");
 
   function handleLocalUserSignIn() {
+    firebase.auth().signOut();
     signInModalContainer.classList.add("hidden");
     mainContentContainer.classList.remove("hidden");
     clearCardContainer();
@@ -74,16 +76,12 @@ export const uiController = (() => {
     allCards.forEach((card) => card.remove());
   };
 
- 
-
   const openBookEditForm = () => {
     editBookFormModal.classList.remove("hidden");
-   
   };
 
   const closeBookEditForm = () => {
     editBookFormModal.classList.add("hidden");
-   
   };
 
   signInLocalButton.addEventListener("click", handleLocalUserSignIn);
@@ -94,7 +92,4 @@ export const uiController = (() => {
   pubsub.subscribe("editCardClicked", openBookEditForm);
   pubsub.subscribe("cardEditComplete", closeBookEditForm);
   pubsub.subscribe("hideEditBookModalClicked", closeBookEditForm);
-  
 })();
-
-

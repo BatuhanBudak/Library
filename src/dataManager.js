@@ -148,7 +148,8 @@ export const dataManager = (() => {
     readPages,
     read,
   }) => {
-    if (!firebase.auth().currentUser) {
+    const user = firebase.auth().currentUser;
+    if (!user) {
       editLocalBook(bookId, title, author, totalPages, readPages, read);
     } else {
       await editBookInDb(bookId, title, author, totalPages, readPages, read);

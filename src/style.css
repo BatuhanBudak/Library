@@ -18,14 +18,16 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center; */
-  background:
-    linear-gradient(to bottom, #141E30, #243B55 )
+  background: linear-gradient(to bottom, #141e30, #243b55);
 }
 h1,
 h2,
 h3 {
   line-height: 1.2;
   margin: 0;
+}
+button{
+  font-family: 'Roboto';
 }
 .sign-in-modal {
   display: flex;
@@ -39,7 +41,6 @@ h3 {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -100,7 +101,7 @@ h3 {
 
 .header {
   height: 4rem;
-  background: black;
+  background: linear-gradient(to bottom, #232526, #414345);
   color: white;
   display: flex;
   align-items: center;
@@ -119,12 +120,14 @@ h3 {
 }
 #header--signout-button,
 #header--signin-button {
-  padding: 0.5rem 1.2rem;
+  padding: 0.8rem 1.5rem;
   font-size: 1rem;
   font-family: Roboto;
-  border-radius: 50px;
+  border-radius: 10px;
   border: none;
   cursor: pointer;
+  background-color: orangered;
+  color: white;
 }
 
 #header--name {
@@ -141,20 +144,39 @@ h3 {
   flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 0.2fr));
-  /* grid-auto-rows: minmax(200px, 1fr); */
   gap: 2rem;
   padding: 2rem;
 }
 
 #new-book-button {
-  align-self: center;
-  padding: 15px 30px;
-  background-color: #555;
-  color: white;
-  border: none;
+  position: fixed;
+  z-index: 5;
+  bottom: 50%;
+  right: 5%;
   cursor: pointer;
   opacity: 0.8;
-  max-width: 200px;
+  color: palegoldenrod;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background-color: firebrick;
+  box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.3);
+}
+#library-info-button {
+  position: fixed;
+  z-index: 5;
+  bottom: 30%;
+  right: 5%;
+  cursor: pointer;
+  opacity: 0.8;
+  background-color: seashell;
+  color: black;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.3);
+}
+#new-book-button:hover,
+#library-info-button:hover {
+  opacity: 1;
 }
 
 .form-popup {
@@ -166,27 +188,28 @@ h3 {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
 
 #form-container {
-  max-width: 300px;
-  background-color: white;
-  background-color: #fefefe;
+  max-width: 500px;
+  background-color: #222;
   margin: auto;
   padding: 1.2rem;
   border: 1px solid #888;
   margin-top: 3rem;
+  font-size: 1.2rem;
+  color: white;
 }
 
 #form-container input[type="text"],
 #form-container input[type="number"] {
-  width: 80%;
+  width: 100%;
   padding: 15px;
   margin: 5px 0 15px 0;
   border: none;
   background: #f1f1f1;
+  font-size: 1rem;
 }
 #form-container input[type="checkbox"] {
   margin: 5px 0 22px 0;
@@ -211,15 +234,15 @@ h3 {
   text-align: center;
 }
 #form-container #cancel {
-  background-color: red;
+  background-color: red
 }
-#form-container .submit-cancel:hover,
-#new-book-button:hover {
+#form-container .submit-cancel:hover {
   opacity: 1;
 }
 
 .card {
   border: 1px solid #eee;
+  padding: .5rem;
   box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.06);
   max-height: 400px;
   display: flex;
@@ -230,26 +253,80 @@ h3 {
   background-color: #222;
   color: white;
   background: linear-gradient(#222, #222) padding-box,
-    linear-gradient(to right, #1a2a6c, #b21f1f,#fdbb2d ) border-box;
+    linear-gradient(to right, #f12711, #f5af19) border-box;
   border-radius: 20px;
   border: 6px solid transparent;
+  font-family: 'Rokkitt';
 }
 .card > h3 {
-  font-weight: normal;
-  font-size: 1rem;
+  font-size: 1.3rem;
+  margin-inline: .3rem;
+  word-break: break-all;
+  font-weight: 500;
 }
-.card button {
+.card-edit-remove-button-container{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: .4rem;
+  
+}
+#card-edit-button{
+  background-color: #04aa6d;
+}
+#card-delete-button{
+  background-color: #ff2525d4
+}
+#card-edit-button,
+#card-delete-button
+{
   padding: 0.5rem 1.25rem;
-  background-color: #555;
   color: white;
   border: none;
   cursor: pointer;
   opacity: 0.8;
-  border-radius: 20px;
+  flex: 1;
+  border-radius: .2rem;
+  font-size: 1rem;
 }
-.card button:hover {
+#card-edit-button:hover,
+#card-delete-button:hover {
   opacity: 1;
 }
+
+.page-operation-buttons-container{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: .4rem;
+}
+#increment-pages{
+  background-color: #04aa6d;
+  font-size: 2rem;
+}
+#decrement-pages{
+  background-color: #ff2525d4;
+  font-size: 2rem;
+}
+#read-book{
+  font-size: 1rem;
+}
+#increment-pages,
+#decrement-pages,
+#read-book {
+  color: black;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  flex: 1;
+  border-radius: .2rem;
+}
+#increment-pages:hover,
+#decrement-pages:hover,
+#read-book:hover{
+  opacity: 1;
+}
+
 
 .library-info-modal {
   display: flex;
@@ -269,7 +346,8 @@ h3 {
 .library-info-modal--content {
   display: flex;
   flex-direction: column;
-  background-color: beige;
+  background-color: #222;
+  color: white;
   width: 400px;
   height: 500px;
   border-radius: 20px;
@@ -299,6 +377,70 @@ h3 {
   font-size: 1.5rem;
   cursor: pointer;
   text-align: center;
+}
+
+.edit-book-modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#edit-book-modal--form {
+  max-width: 500px;
+  background-color: #222;
+  margin: auto;
+  padding: 1.2rem;
+  border: 1px solid #888;
+  margin-top: 3rem;
+  font-size: 1.2rem;
+  color: white;
+}
+
+#edit-book-modal--form input[type="text"],
+#edit-book-modal--form input[type="number"] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 15px 0;
+  border: none;
+  background: #f1f1f1;
+  font-size: 1rem;
+}
+#edit-book-modal--form input[type="checkbox"] {
+  margin: 5px 0 22px 0;
+  font-size: 1rem;
+}
+
+/* When the inputs get focus, do something */
+#edit-book-modal--form input[type="text"]:focus,
+#edit-book-modal--form input[type="number"]:focus {
+  background-color: #ddd;
+  outline: none;
+  font-size: 1rem;
+}
+
+#edit-book-modal--form .edit-book-submit-cancel {
+  background-color: #04aa6d;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin: 0 5px 10px 5px;
+  opacity: 0.8;
+  text-align: center;
+  font-size: 1rem;
+}
+#edit-book-modal--form #edit-book-cancel-button {
+  background-color: red;
+}
+#edit-book-modal--form .edit-book-submit-cancel:hover {
+  opacity: 1;
 }
 
 hr {
