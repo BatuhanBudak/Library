@@ -75,22 +75,21 @@ export const dataManager = (() => {
       fireStoreModule.deleteBookFromDb(bookToDelete.dbId);
     }
   };
-  const handleEditReadValue = async ({id, readValue}) => {
+  const handleEditReadValue = async ({ id, readValue }) => {
     if (!firebase.auth().currentUser) {
       const allBooks = JSON.parse(localStorage.getItem("myBooks"));
       const editedBooks = [...allBooks].map((book) => {
         if (book.id === id) {
           return {
             ...book,
-           read: !readValue,
+            read: !readValue,
           };
         } else {
           return book;
         }
       });
-      console.log(editedBooks);
       localStorage.setItem("myBooks", JSON.stringify(editedBooks));
-    }else{
+    } else {
       const allBooks = await fireStoreModule.getBooksFromDb();
       const bookToDUpdateId = allBooks.find((book) => book.id === id).dbId;
       await fireStoreModule.updateBookReadValueInDb(
@@ -98,7 +97,6 @@ export const dataManager = (() => {
         !readValue
       );
     }
-    
   };
 
   async function editBookInDb(
@@ -156,6 +154,35 @@ export const dataManager = (() => {
     }
   };
 
+  const updateReadPagesLocalBook = (id, newReadPagesValue) => {
+    const allBooks = JSON.parse(localStorage.getItem("myBooks"));
+    const editedBooks = [...allBooks].map((book) => {
+      if (book.id === id) {
+        return {
+          ...book,
+          readPages: newReadPagesValue,
+        };
+      } else {
+        return book;
+      }
+    });
+    localStorage.setItem("myBooks", JSON.stringify(editedBooks));
+  };
+
+  const updateReadPagesValue = async ({ cardId, newReadPagesValue }) => {
+    const user = firebase.auth().currentUser;
+    if (!user) {
+      updateReadPagesLocalBook(cardId, newReadPagesValue);
+    } else {
+      const allBooks = await fireStoreModule.getBooksFromDb();
+      const bookToEdit = allBooks.find((book) => book.id === cardId);
+      await fireStoreModule.updateReadPagesValueInDb(
+        bookToEdit.dbId,
+        newReadPagesValue
+      );
+    }
+  };
+
   const handleSignedOutUser = () => {
     handleLocalUserSignIn();
   };
@@ -172,4 +199,6 @@ export const dataManager = (() => {
   pubsub.subscribe("cardRemoved", handleRemoveBook);
   pubsub.subscribe("cardEditComplete", handleEditBook);
   pubsub.subscribe("readValueEdited", handleEditReadValue);
+  pubsub.subscribe("incrementReadPagesComplete", updateReadPagesValue);
+  pubsub.subscribe("decrementReadPagesComplete", updateReadPagesValue);
 })();

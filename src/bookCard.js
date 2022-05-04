@@ -55,14 +55,24 @@ export const bookCard = (() => {
         cardReadButton.addEventListener("click", editReadValue);
         cardDeleteButton.addEventListener("click", removeCard);
         cardEditButton.addEventListener("click", editCardClicked);
+        cardIncrementPageCountButton.addEventListener('click', incrementReadPages);
+        cardDecrementPageCountButton.addEventListener('click', decrementReadPages);
       }
-      //TODO
+      
       function editReadValue(e){
         const card = document.getElementById(e.target.parentNode.parentNode.id);
         const buttonValue = card.children[5].children[1].textContent === 'Read' ? true : false;
         card.children[5].children[1].textContent = buttonValue ? `Not read`: `Read`;
         pubsub.publish("readValueEdited", {id: card.id, readValue:buttonValue });
       }
+
+      function getReadPagesValue(e) {
+        const card = document.getElementById(e.target.parentNode.parentNode.id);
+        const readPagesContent = card.children[4].textContent;
+        const semiColonIndex = readPagesContent.indexOf(":");
+        return Number(readPagesContent.slice(semiColonIndex + 2));
+      }
+      
       function removeCard(e) {
         const parentNode = e.target.parentNode.parentNode;
         pubsub.publish("cardRemoved",parentNode.id)
@@ -73,6 +83,21 @@ export const bookCard = (() => {
         const parentNodeId = e.target.parentNode.parentNode.id;
         pubsub.publish('editCardClicked', parentNodeId);
        
+      }
+      function incrementReadPages(e){
+        let readPagesValue = getReadPagesValue(e);
+        const cardId =e.target.parentNode.parentNode.id;
+        const  newReadPagesValue = ++readPagesValue;
+        document.getElementById(e.target.parentNode.parentNode.id).children[4].textContent = "Read Pages: " + newReadPagesValue;
+        pubsub.publish('incrementReadPagesComplete', {newReadPagesValue, cardId} )
+      }
+
+      function decrementReadPages(e){
+        let readPagesValue = getReadPagesValue(e);
+        const cardId = e.target.parentNode.parentNode.id;
+        const  newReadPagesValue = --readPagesValue;
+        document.getElementById(e.target.parentNode.parentNode.id).children[4].textContent = "Read Pages: "+ newReadPagesValue;
+        pubsub.publish('decrementReadPagesComplete', {cardId, newReadPagesValue} )
       }
       function editCardComplete({cardId,title,
         author,
@@ -87,7 +112,7 @@ export const bookCard = (() => {
           card.children[5].children[1].textContent = read ? `Read` : `Not read`;
       }
      
-     
       pubsub.subscribe('cardEditComplete',editCardComplete );
       return {createBookCard}
 })()
+

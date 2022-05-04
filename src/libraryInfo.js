@@ -68,6 +68,7 @@ export const libraryInfo = (() => {
     );
     libraryInfoModalCloseButton.textContent = "X";
     
+    libraryInfoModalContent.appendChild(libraryInfoModalCloseButton);
     libraryInfoModalContent.appendChild(libraryInfoModalTitle);
     libraryInfoModalContent.appendChild(libraryInfoModalTotalBooks);
     libraryInfoModalContent.appendChild(document.createElement('hr'));
@@ -77,7 +78,6 @@ export const libraryInfo = (() => {
     libraryInfoModalContent.appendChild(document.createElement('hr'));
     libraryInfoModalContent.appendChild(libraryInfoModalReadPages);
     libraryInfoModalContent.appendChild(document.createElement('hr'));
-    libraryInfoModalContent.appendChild(libraryInfoModalCloseButton);
     libraryInfoModal.appendChild(libraryInfoModalContent);
     document.body.appendChild(libraryInfoModal);
 
