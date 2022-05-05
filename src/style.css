@@ -22,8 +22,8 @@ h3 {
   line-height: 1.2;
   margin: 0;
 }
-button{
-  font-family: 'Roboto';
+button {
+  font-family: "Roboto";
 }
 .sign-in-modal {
   display: flex;
@@ -189,14 +189,13 @@ button{
 
 #form-container {
   max-width: 500px;
-  background-color: #222;
+  background:  linear-gradient(to bottom, #9da6ac, #2c3e50);
   margin: auto;
   padding: 1.2rem;
   border: 1px solid #888;
   margin-top: 3rem;
   font-size: 1.2rem;
-  color: white;
-  font-family: 'Roboto';
+  font-family: "Roboto";
 }
 
 #form-container input[type="text"],
@@ -207,10 +206,7 @@ button{
   border: none;
   background: #f1f1f1;
   font-size: 1rem;
-  font-family: 'Roboto';
-}
-#form-container input[type="checkbox"] {
-  margin: 5px 0 22px 0;
+  font-family: "Roboto";
 }
 
 /* When the inputs get focus, do something */
@@ -232,7 +228,7 @@ button{
   text-align: center;
 }
 #form-container #cancel {
-  background-color: red
+  background-color: red;
 }
 #form-container .submit-cancel:hover {
   opacity: 1;
@@ -240,7 +236,7 @@ button{
 
 .card {
   border: 1px solid #eee;
-  padding: .5rem;
+  padding: 0.5rem;
   box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.06);
   max-height: 400px;
   display: flex;
@@ -254,38 +250,36 @@ button{
     linear-gradient(to right, #f12711, #f5af19) border-box;
   border-radius: 20px;
   border: 6px solid transparent;
-  font-family: 'Rokkitt';
+  font-family: "Rokkitt";
 }
 .card > h3 {
   font-size: 1.3rem;
-  margin-inline: .3rem;
+  margin-inline: 0.3rem;
   word-break: break-all;
   font-weight: 500;
   text-transform: capitalize;
 }
-.card-edit-remove-button-container{
+.card-edit-remove-button-container {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  gap: .4rem;
-  
+  gap: 0.4rem;
 }
-#card-edit-button{
+#card-edit-button {
   background-color: #04aa6d;
 }
-#card-delete-button{
-  background-color: #ff2525d4
+#card-delete-button {
+  background-color: #ff2525d4;
 }
 #card-edit-button,
-#card-delete-button
-{
+#card-delete-button {
   padding: 0.5rem 1.25rem;
   color: white;
   border: none;
   cursor: pointer;
   opacity: 0.8;
   flex: 1;
-  border-radius: .2rem;
+  border-radius: 0.2rem;
   font-size: 1rem;
 }
 #card-edit-button:hover,
@@ -293,21 +287,21 @@ button{
   opacity: 1;
 }
 
-.page-operation-buttons-container{
+.page-operation-buttons-container {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  gap: .4rem;
+  gap: 0.4rem;
 }
-#increment-pages{
+#increment-pages {
   background-color: #04aa6d;
   font-size: 2rem;
 }
-#decrement-pages{
+#decrement-pages {
   background-color: #ff2525d4;
   font-size: 2rem;
 }
-#read-book{
+#read-book {
   font-size: 1rem;
 }
 #increment-pages,
@@ -318,14 +312,13 @@ button{
   cursor: pointer;
   opacity: 0.8;
   flex: 1;
-  border-radius: .2rem;
+  border-radius: 0.2rem;
 }
 #increment-pages:hover,
 #decrement-pages:hover,
-#read-book:hover{
+#read-book:hover {
   opacity: 1;
 }
-
 
 .library-info-modal {
   display: flex;
@@ -363,12 +356,12 @@ button{
   font-size: 1.3rem;
   font-weight: 500;
   text-align: center;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   color: goldenrod;
 }
-.library-info-modal--close-button{
+.library-info-modal--close-button {
   cursor: pointer;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   background-color: white;
   margin-right: 1rem;
   border: none;
@@ -376,9 +369,10 @@ button{
   color: black;
   font-size: 1rem;
   justify-self: flex-end;
-  opacity: .8;
+  opacity: 0.8;
+  margin-bottom: -1rem;
 }
-.library-info-modal--close-button:hover{
+.library-info-modal--close-button:hover {
   opacity: 1;
 }
 .sign-in-modal--buttons-container {
@@ -413,8 +407,8 @@ button{
   border: 1px solid #888;
   margin-top: 3rem;
   font-size: 1.2rem;
-  color: white;
-  font-family: 'Roboto';
+  font-family: "Roboto";
+  background:  linear-gradient(to bottom, #9da6ac, #2c3e50);
 }
 
 #edit-book-modal--form input[type="text"],
@@ -425,11 +419,7 @@ button{
   border: none;
   background: #f1f1f1;
   font-size: 1rem;
-  font-family: 'Roboto';
-}
-#edit-book-modal--form input[type="checkbox"] {
-  margin: 5px 0 22px 0;
-  font-size: 1rem;
+  font-family: "Roboto";
 }
 
 /* When the inputs get focus, do something */
@@ -458,10 +448,72 @@ button{
 #edit-book-modal--form .edit-book-submit-cancel:hover {
   opacity: 1;
 }
+.read-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
 
 hr {
   width: 50%;
 }
+
+/* CUSTOM CHECKBOX */
+
+#edit-book-checkbox-label,
+#new-book-checkbox-label {
+  display: block;
+  position: relative;
+  padding-left: 100px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#edit-book-checkbox-label input,
+#new-book-checkbox-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+#edit-book-checkbox-label input:checked ~ .control,
+#new-book-checkbox-label input:checked ~ .control {
+  background-color: #04aa6d;
+}
+#edit-book-checkbox-label input:checked ~ .control:after,
+#new-book-checkbox-label input:checked ~ .control:after {
+  left: 27.5px;
+}
+#edit-book-checkbox-label .control,
+#new-book-checkbox-label .control {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 50px;
+  border-radius: 25px;
+  background-color: darkgray;
+  transition: background-color 0.15s ease-in;
+}
+#edit-book-checkbox-label .control:after,
+#new-book-checkbox-label .control:after {
+  content: "";
+  position: absolute;
+  left: 2.5px;
+  top: 2.55px;
+  width: 20px;
+  height: 20px;
+  border-radius: 25px;
+  background: white;
+  transition: left 0.15s ease-in;
+}
+
 /* 
 .footer {
   height: 4rem;

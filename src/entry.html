@@ -72,8 +72,13 @@
               max="10000"
               required
             /><br />
-            <label for="read">Read?</label><br />
-            <input type="checkbox" id="read" name="read" value="Read" /><br />
+            <div class="read-container">
+              <span>Did you read this book?</span>
+              <label for="read" id="new-book-checkbox-label">
+                <input type="checkbox" id="read" name="read" value="Read" />
+                <span class="control"></span>
+              </label>
+              </div>
             <input
               class="submit-cancel"
               type="submit"
@@ -112,8 +117,13 @@
               max="10000"
               required
             /><br />
-            <label for="edit-book-read">Read?</label><br />
-            <input type="checkbox" id="edit-book-read" name="editBookRead" value="Read" /><br />
+              <div class="read-container">
+                <span>Did you read this book?</span>
+                <label for="edit-book-read" id="edit-book-checkbox-label">
+                  <input type="checkbox" id="edit-book-read" name="editBookRead" value="Read" />
+                  <span class="control"></span>
+                </label>
+              </div>
             <button class="edit-book-submit-cancel"
             type="submit"
             id="edit-book-submit-button"
