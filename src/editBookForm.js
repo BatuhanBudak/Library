@@ -1,7 +1,7 @@
 import { pubsub } from "./pubsub";
+import { customFormValidation } from "./customFormValidation";
 
 export const editBookFormModule = (() => {
-  const editBookModal = document.querySelector(".edit-book-modal");
   const editBookForm = document.getElementById("edit-book-modal--form");
   const editBookFormTitle = document.getElementById("edit-book-title");
   const editBookFormAuthor = document.getElementById("edit-book-author");
@@ -10,9 +10,6 @@ export const editBookFormModule = (() => {
   );
   const editBookFormReadPages = document.getElementById("edit-book-readPages");
   const editBookFormReadButton = document.getElementById("edit-book-read");
-  const editBookFormSubmitButton = document.getElementById(
-    "edit-book-submit-button"
-  );
   const editBookFormCancelButton = document.getElementById(
     "edit-book-cancel-button"
   );
@@ -32,7 +29,8 @@ export const editBookFormModule = (() => {
     return filteredText;
   }
   const getReadValueFromCard = (cardToEdit) => {
-    const readValue = cardToEdit.children[5].children[1].textContent === "Read" ? true : false;
+    const readValue =
+      cardToEdit.children[5].children[1].textContent === "Read" ? true : false;
     return readValue;
   };
 
@@ -52,30 +50,51 @@ export const editBookFormModule = (() => {
   };
 
   const handleEditBookFormSubmit = (e) => {
-    if (e.submitter === editBookFormCancelButton) return;
     e.preventDefault();
-    const cardId = editBookForm.getAttribute("data-id");
-    const allCards = document.querySelectorAll(".card");
-    const cardToEditId = [...allCards].find((card) => card.id === cardId).id;
-    const editedBookInfo = {
-      title: editBookForm.editBookTitle.value,
-      author: editBookForm.editBookAuthor.value,
-      totalPages: editBookForm.editBookTotalPages.value,
-      readPages: editBookForm.editBookReadPages.value,
-      read: editBookForm.editBookRead.checked,
-    };
 
-    pubsub.publish("cardEditComplete", {
-      cardId: cardToEditId,
-      ...editedBookInfo,
-    });
-    editBookForm.reset();
+    // Get all of the form elements
+    let fields = editBookForm.elements;
+
+    // Validate each field
+    // Store the first field with an error to a variable so we can bring it into focus later
+    let error, hasErrors;
+    for (let i = 0; i < fields.length; i++) {
+      error = customFormValidation.hasError(fields[i]);
+      if (error) {
+        showError(fields[i], error);
+        if (!hasErrors) {
+          hasErrors = fields[i];
+        }
+      }
+    }
+    // If there are errrors, don't submit form and focus on first element with error
+    if (hasErrors) {
+      e.preventDefault();
+      hasErrors.focus();
+    } else {
+      const cardId = editBookForm.getAttribute("data-id");
+      const allCards = document.querySelectorAll(".card");
+      const cardToEditId = [...allCards].find((card) => card.id === cardId).id;
+      const editedBookInfo = {
+        title: editBookForm.editBookTitle.value,
+        author: editBookForm.editBookAuthor.value,
+        totalPages: editBookForm.editBookTotalPages.value,
+        readPages: editBookForm.editBookReadPages.value,
+        read: editBookForm.editBookRead.checked,
+      };
+
+      pubsub.publish("cardEditComplete", {
+        cardId: cardToEditId,
+        ...editedBookInfo,
+      });
+      editBookForm.reset();
+    }
   };
   const hideEditBookModalClicked = (e) => {
     e.preventDefault();
     pubsub.publish("hideEditBookModalClicked");
-  }
+  };
   pubsub.subscribe("editCardClicked", populateEditFormValues);
   editBookForm.addEventListener("submit", handleEditBookFormSubmit);
-  editBookFormCancelButton.addEventListener('click', hideEditBookModalClicked)
+  editBookFormCancelButton.addEventListener("click", hideEditBookModalClicked);
 })();

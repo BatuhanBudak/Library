@@ -10,6 +10,7 @@ import {firebaseUiModule} from './firebaseUi'
 import {fireStoreModule} from './firestore'
 import { libraryInfo } from './libraryInfo';
 import { editBookFormModule } from './editBookForm';
+import { customFormValidation } from './customFormValidation';
 
 
 

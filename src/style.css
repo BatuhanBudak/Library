@@ -199,6 +199,7 @@ legend{
   margin-top: 3rem;
   font-size: 1.2rem;
   font-family: "Roboto";
+  border-radius: 20px;
 }
 
 #form-container input[type="text"],
@@ -531,4 +532,14 @@ hr {
 /* UTILS */
 .hidden {
   display: none;
+}
+
+.error {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  font-style: italic;
+  font-size: 1rem;
 }

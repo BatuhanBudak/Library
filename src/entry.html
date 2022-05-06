@@ -47,7 +47,7 @@
       <div class="card-container"></div>
       </div>
       <div class="form-popup">
-        <form id="form-container">
+        <form id="form-container" class="validate">
           <fieldset>
             <legend>New Book</legend>
             <label for="title"> Title: </label><br />
@@ -79,12 +79,10 @@
                 <span class="control"></span>
               </label>
               </div>
-            <input
-              class="submit-cancel"
-              type="submit"
-              id="submit"
-              value="Submit"
-            />
+            <button   class="submit-cancel"
+            type="submit"
+            id="submit"
+            value="Submit">Submit</button>
             <button class="submit-cancel" id="cancel" type="cancel">
               Cancel
             </button>
@@ -92,7 +90,7 @@
         </form>
       </div>
       <div class="edit-book-modal hidden">
-        <form id="edit-book-modal--form">
+        <form id="edit-book-modal--form" class="validate">
           <fieldset>
             <legend>Edit Book</legend>
             <label for="edit-book-title"> Title: </label><br />
