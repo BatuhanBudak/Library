@@ -52,26 +52,12 @@ export const editBookFormModule = (() => {
   const handleEditBookFormSubmit = (e) => {
     e.preventDefault();
 
-    // Get all of the form elements
-    let fields = editBookForm.elements;
-
-    // Validate each field
-    // Store the first field with an error to a variable so we can bring it into focus later
-    let error, hasErrors;
-    for (let i = 0; i < fields.length; i++) {
-      error = customFormValidation.hasError(fields[i]);
-      if (error) {
-        showError(fields[i], error);
-        if (!hasErrors) {
-          hasErrors = fields[i];
-        }
-      }
-    }
+    let hasErrors = customFormValidation.checkForErrors(editBookForm);
     // If there are errrors, don't submit form and focus on first element with error
     if (hasErrors) {
       e.preventDefault();
       hasErrors.focus();
-    } else {
+    }else {
       const cardId = editBookForm.getAttribute("data-id");
       const allCards = document.querySelectorAll(".card");
       const cardToEditId = [...allCards].find((card) => card.id === cardId).id;

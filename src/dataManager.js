@@ -40,19 +40,34 @@ export const dataManager = (() => {
     id,
   }) => {
     if (!firebase.auth().currentUser) {
-      const oldBooks = JSON.parse(localStorage.getItem("myBooks"));
-      const newBooks = [
-        ...oldBooks,
-        {
-          title: title,
-          author: author,
-          totalPages: totalPages,
-          readPages: readPages,
-          read: read,
-          id: id,
-        },
-      ];
-      localStorage.setItem("myBooks", JSON.stringify(newBooks));
+      if(localStorage.getItem("myBooks") === ""){
+        const newBooks = [
+          {
+            title: title,
+            author: author,
+            totalPages: totalPages,
+            readPages: readPages,
+            read: read,
+            id: id,
+          }
+        ]
+        localStorage.setItem("myBooks", JSON.stringify(newBooks));
+      }else{
+        const oldBooks = JSON.parse(localStorage.getItem("myBooks"));
+        const newBooks = [
+          ...oldBooks,
+          {
+            title: title,
+            author: author,
+            totalPages: totalPages,
+            readPages: readPages,
+            read: read,
+            id: id,
+          },
+        ];
+        localStorage.setItem("myBooks", JSON.stringify(newBooks));
+      }
+     
     } else {
       fireStoreModule.createBookInDb(
         title,

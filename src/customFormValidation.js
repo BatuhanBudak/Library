@@ -130,6 +130,25 @@ export const customFormValidation = (() => {
     message.style.visibility = "hidden";
   };
 
+  const checkForErrors = (form) => {
+    // Get all of the form elements
+    let fields = form.elements;
+
+    // Validate each field
+    // Store the first field with an error to a variable so we can bring it into focus later
+    let error, hasErrors;
+    for (let i = 0; i < fields.length; i++) {
+      error = hasError(fields[i]);
+      if (error) {
+        showError(fields[i], error);
+        if (!hasErrors) {
+          hasErrors = fields[i];
+        }
+      }
+    }
+    return hasErrors;
+  };
+
   document.addEventListener(
     "blur",
     function (event) {
@@ -147,5 +166,5 @@ export const customFormValidation = (() => {
     },
     true
   );
-  return { hasError, showError };
+  return { hasError, showError, checkForErrors };
 })();

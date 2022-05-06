@@ -14,26 +14,13 @@ export const addNewBookForm = (() => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    // Get all of the form elements
-    let fields = formContainer.elements;
-
-    // Validate each field
-    // Store the first field with an error to a variable so we can bring it into focus later
-    let error, hasErrors;
-    for (let i = 0; i < fields.length; i++) {
-      error = customFormValidation.hasError(fields[i]);
-      if (error) {
-        showError(fields[i], error);
-        if (!hasErrors) {
-          hasErrors = fields[i];
-        }
-      }
-    }
+    let hasErrors = customFormValidation.checkForErrors(form);
     // If there are errrors, don't submit form and focus on first element with error
     if (hasErrors) {
       e.preventDefault();
       hasErrors.focus();
-    } else {
+    } 
+    else {
       const newBook = {
         title: form.title.value,
         author: form.author.value,
@@ -42,6 +29,7 @@ export const addNewBookForm = (() => {
         read: form.read.checked,
         id: nanoid(),
       };
+      console.log(newBook);
       pubsub.publish("newBookCreated", newBook);
       formContainer[0].style.display = "none";
       form.reset();
