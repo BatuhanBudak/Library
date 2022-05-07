@@ -51,9 +51,9 @@
           <fieldset>
             <legend>New Book</legend>
             <label for="title"> Title: </label><br />
-            <input type="text" id="title" name="title" required autofocus /><br />
+            <input type="text" id="title" name="title" required autofocus minlength="2" maxlength="20" /><br />
             <label for="author">Author Name:</label><br />
-            <input type="text" id="author" name="author" required /><br />
+            <input type="text" id="author" name="author" required minlength="2" maxlength="20" /><br />
             <label for="totalPages">Total Pages:</label><br />
             <input
               type="number"
@@ -94,9 +94,9 @@
           <fieldset>
             <legend>Edit Book</legend>
             <label for="edit-book-title"> Title: </label><br />
-            <input type="text" id="edit-book-title" name="editBookTitle" required autofocus /><br />
+            <input type="text" id="edit-book-title" name="editBookTitle" required autofocus minlength="2" maxlength="20" /><br />
             <label for="edit-book-author">Author:</label><br />
-            <input type="text" id="edit-book-author" name="editBookAuthor" required /><br />
+            <input type="text" id="edit-book-author" name="editBookAuthor" required minlength="2" maxlength="20"  /><br />
             <label for="edit-book-totalPages">Total Pages:</label><br />
             <input
               type="number"

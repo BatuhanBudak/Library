@@ -94,6 +94,8 @@ export const dataManager = (() => {
     if (!firebase.auth().currentUser) {
       const allBooks = JSON.parse(localStorage.getItem("myBooks"));
       const editedBooks = [...allBooks].map((book) => {
+        //TODO 
+        //if read value is true then set the read pages to total pages
         if (book.id === id) {
           return {
             ...book,

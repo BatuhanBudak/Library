@@ -16,19 +16,36 @@ export const customFormValidation = (() => {
 
     let validity = field.validity;
 
+    if (field.id === "readPages") {
+      if (
+        Number(document.getElementById("totalPages").value) <
+        Number(field.value)
+      ) {
+        return "Read pages cannot be bigger than the total pages";
+      }
+      if (validity.valid) return;
+    }
+    if (field.id === "edit-book-readPages") {
+      if (
+        Number(document.getElementById("edit-book-totalPages").value) <
+        Number(field.value)
+      ) {
+        return "Read pages cannot be bigger than the total pages";
+      }
+      if (validity.valid) return;
+    }
+
     if (validity.valid) return;
 
     // If field is required and empty
     if (validity.valueMissing) return "Please fill out this field.";
 
     // If not the right type
-    if (validity.typeMismatch) {
-      // Email
-      if (field.type === "email") return "Please enter an email address.";
+    // if (validity.typeMismatch) {
+    //   // Number
+    //   if (field.type === "number") return "Please enter a number.";
 
-      // URL
-      if (field.type === "url") return "Please enter a URL.";
-    }
+    // }
 
     if (validity.tooShort)
       return (
@@ -51,9 +68,6 @@ export const customFormValidation = (() => {
 
     // If number input isn't a number
     if (validity.badInput) return "Please enter a number.";
-
-    // If a number value doesn't match the step interval
-    if (validity.stepMismatch) return "Please select a valid value.";
 
     // If a number field is over the max
     if (validity.rangeOverflow)

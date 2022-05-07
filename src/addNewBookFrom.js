@@ -29,7 +29,6 @@ export const addNewBookForm = (() => {
         read: form.read.checked,
         id: nanoid(),
       };
-      console.log(newBook);
       pubsub.publish("newBookCreated", newBook);
       formContainer[0].style.display = "none";
       form.reset();

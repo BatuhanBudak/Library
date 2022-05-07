@@ -45,7 +45,6 @@ export const editBookFormModule = (() => {
     editBookFormAuthor.value = filteredText[1];
     editBookFormTotalPages.value = Number(filteredText[2]);
     editBookFormReadPages.value = Number(filteredText[3]);
-    editBookFormReadPages.value = Number(filteredText[3]);
     editBookFormReadButton.checked = readValue;
   };
 
