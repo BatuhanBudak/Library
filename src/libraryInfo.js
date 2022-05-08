@@ -67,25 +67,27 @@ export const libraryInfo = (() => {
       "library-info-modal--close-button"
     );
     libraryInfoModalCloseButton.textContent = "X";
-    
+
     libraryInfoModalContent.appendChild(libraryInfoModalCloseButton);
     libraryInfoModalContent.appendChild(libraryInfoModalTitle);
     libraryInfoModalContent.appendChild(libraryInfoModalTotalBooks);
-    libraryInfoModalContent.appendChild(document.createElement('hr'));
+    libraryInfoModalContent.appendChild(document.createElement("hr"));
     libraryInfoModalContent.appendChild(libraryInfoModalReadBooks);
-    libraryInfoModalContent.appendChild(document.createElement('hr'));
+    libraryInfoModalContent.appendChild(document.createElement("hr"));
     libraryInfoModalContent.appendChild(libraryInfoModalTotalPages);
-    libraryInfoModalContent.appendChild(document.createElement('hr'));
+    libraryInfoModalContent.appendChild(document.createElement("hr"));
     libraryInfoModalContent.appendChild(libraryInfoModalReadPages);
-    libraryInfoModalContent.appendChild(document.createElement('hr'));
+    libraryInfoModalContent.appendChild(document.createElement("hr"));
     libraryInfoModal.appendChild(libraryInfoModalContent);
     document.body.appendChild(libraryInfoModal);
 
     const hideInfoModal = () => {
-        libraryInfoModal.classList.add("hidden")
-        }  
-      document.querySelector('.library-info-modal--close-button').addEventListener('click', hideInfoModal )
-};
-    
+      libraryInfoModal.classList.add("hidden");
+    };
+    document
+      .querySelector(".library-info-modal--close-button")
+      .addEventListener("click", hideInfoModal);
+  };
+
   libraryInfoButton.addEventListener("click", createLibraryInfoModal);
 })();
