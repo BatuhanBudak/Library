@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
 }
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -16,18 +17,22 @@ body {
   font-size: 16px;
   background: linear-gradient(to bottom, #141e30, #243b55);
 }
+
 h1,
 h2,
 h3 {
   line-height: 1.2;
   margin: 0;
 }
+
 button {
   font-family: "Roboto";
 }
-legend{
+
+legend {
   font-size: 1.5rem;
 }
+
 .sign-in-modal {
   display: flex;
   flex-direction: column;
@@ -46,13 +51,13 @@ legend{
 .sign-in-modal-content {
   display: flex;
   flex-direction: column;
-  background-color: beige;
   width: 600px;
   height: 300px;
   border-radius: 20px;
-  /* align-items: center; */
   justify-content: space-evenly;
+  background: linear-gradient(to bottom, #9da6ac, #2c3e50);
 }
+
 .sign-in-modal-title {
   align-self: center;
   font-size: 1.5rem;
@@ -65,11 +70,18 @@ legend{
   align-items: center;
   justify-content: space-around;
 }
-.sign-in-modal--buttons-container > button {
+
+.sign-in-modal--buttons-container>button {
   padding: 2rem 4rem;
   font-size: 1.5rem;
   cursor: pointer;
   text-align: center;
+  background-color: gray;
+  opacity: .8;
+}
+
+.sign-in-modal--buttons-container>button:hover {
+  opacity: 1;
 }
 
 .firebase-modal-container {
@@ -88,9 +100,11 @@ legend{
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
+
 .firebaseui-tos.firebaseui-tospp-full-message {
   color: black;
 }
+
 .content {
   display: flex;
   flex-direction: column;
@@ -108,15 +122,18 @@ legend{
 
   padding: 2.5rem;
 }
+
 .header--title {
-  /* margin-right: auto; */
   font-size: 2rem;
+  opacity: .8;
 }
+
 .header--user-info {
   display: flex;
   gap: 1rem;
   align-items: center;
 }
+
 #header--signout-button,
 #header--signin-button {
   padding: 0.8rem 1.5rem;
@@ -160,6 +177,7 @@ legend{
   background-color: firebrick;
   box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.3);
 }
+
 #library-info-button {
   position: fixed;
   z-index: 5;
@@ -173,6 +191,7 @@ legend{
   border-radius: 10px;
   box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.3);
 }
+
 #new-book-button:hover,
 #library-info-button:hover {
   opacity: 1;
@@ -192,7 +211,7 @@ legend{
 
 #form-container {
   max-width: 500px;
-  background:  linear-gradient(to bottom, #9da6ac, #2c3e50);
+  background: linear-gradient(to bottom, #9da6ac, #2c3e50);
   margin: auto;
   padding: 1.2rem;
   border: 1px solid #888;
@@ -231,9 +250,11 @@ legend{
   opacity: 0.8;
   text-align: center;
 }
+
 #form-container #cancel {
   background-color: red;
 }
+
 #form-container .submit-cancel:hover {
   opacity: 1;
 }
@@ -256,25 +277,30 @@ legend{
   border: 6px solid transparent;
   font-family: "Rokkitt";
 }
-.card > h3 {
+
+.card>h3 {
   font-size: 1.3rem;
   margin-inline: 0.3rem;
   word-break: break-all;
   font-weight: 500;
   text-transform: capitalize;
 }
+
 .card-edit-remove-button-container {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   gap: 0.4rem;
 }
+
 #card-edit-button {
   background-color: #04aa6d;
 }
+
 #card-delete-button {
   background-color: #ff2525d4;
 }
+
 #card-edit-button,
 #card-delete-button {
   padding: 0.5rem 1.25rem;
@@ -286,6 +312,7 @@ legend{
   border-radius: 0.2rem;
   font-size: 1rem;
 }
+
 #card-edit-button:hover,
 #card-delete-button:hover {
   opacity: 1;
@@ -297,17 +324,21 @@ legend{
   width: 100%;
   gap: 0.4rem;
 }
+
 #increment-pages {
   background-color: #04aa6d;
   font-size: 2rem;
 }
+
 #decrement-pages {
   background-color: #ff2525d4;
   font-size: 2rem;
 }
+
 #read-book {
   font-size: 1rem;
 }
+
 #increment-pages,
 #decrement-pages,
 #read-book {
@@ -318,6 +349,7 @@ legend{
   flex: 1;
   border-radius: 0.2rem;
 }
+
 #increment-pages:hover,
 #decrement-pages:hover,
 #read-book:hover {
@@ -348,10 +380,12 @@ legend{
   border-radius: 20px;
   align-items: center;
 }
+
 .library-info-modal--title {
   font-size: 1.9rem;
   justify-self: center;
 }
+
 .library-info-modal--read-books,
 .library-info-modal--total-books,
 .library-info-modal--total-pages,
@@ -363,6 +397,7 @@ legend{
   font-family: "Roboto";
   color: goldenrod;
 }
+
 .library-info-modal--close-button {
   cursor: pointer;
   padding: 0.5rem 1rem;
@@ -376,15 +411,18 @@ legend{
   opacity: 0.8;
   margin-bottom: -1rem;
 }
+
 .library-info-modal--close-button:hover {
   opacity: 1;
 }
+
 .sign-in-modal--buttons-container {
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
-.sign-in-modal--buttons-container > button {
+
+.sign-in-modal--buttons-container>button {
   padding: 2rem 4rem;
   font-size: 1.5rem;
   cursor: pointer;
@@ -412,7 +450,7 @@ legend{
   margin-top: 3rem;
   font-size: 1.2rem;
   font-family: "Roboto";
-  background:  linear-gradient(to bottom, #9da6ac, #2c3e50);
+  background: linear-gradient(to bottom, #9da6ac, #2c3e50);
 }
 
 #edit-book-modal--form input[type="text"],
@@ -446,12 +484,15 @@ legend{
   text-align: center;
   font-size: 1rem;
 }
+
 #edit-book-modal--form #edit-book-cancel-button {
   background-color: red;
 }
+
 #edit-book-modal--form .edit-book-submit-cancel:hover {
   opacity: 1;
 }
+
 .read-container {
   display: flex;
   justify-content: space-around;
@@ -478,6 +519,7 @@ hr {
   -ms-user-select: none;
   user-select: none;
 }
+
 #edit-book-checkbox-label input,
 #new-book-checkbox-label input {
   position: absolute;
@@ -486,14 +528,17 @@ hr {
   height: 0;
   width: 0;
 }
-#edit-book-checkbox-label input:checked ~ .control,
-#new-book-checkbox-label input:checked ~ .control {
+
+#edit-book-checkbox-label input:checked~.control,
+#new-book-checkbox-label input:checked~.control {
   background-color: #04aa6d;
 }
-#edit-book-checkbox-label input:checked ~ .control:after,
-#new-book-checkbox-label input:checked ~ .control:after {
+
+#edit-book-checkbox-label input:checked~.control:after,
+#new-book-checkbox-label input:checked~.control:after {
   left: 27.5px;
 }
+
 #edit-book-checkbox-label .control,
 #new-book-checkbox-label .control {
   position: absolute;
@@ -505,6 +550,7 @@ hr {
   background-color: darkgray;
   transition: background-color 0.15s ease-in;
 }
+
 #edit-book-checkbox-label .control:after,
 #new-book-checkbox-label .control:after {
   content: "";
@@ -517,17 +563,6 @@ hr {
   background: white;
   transition: left 0.15s ease-in;
 }
-
-/* 
-.footer {
-  height: 4rem;
-  background: black;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-} */
 
 /* UTILS */
 .hidden {

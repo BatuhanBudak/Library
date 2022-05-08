@@ -19,8 +19,7 @@ export const addNewBookForm = (() => {
     if (hasErrors) {
       e.preventDefault();
       hasErrors.focus();
-    } 
-    else {
+    } else {
       const newBook = {
         title: form.title.value,
         author: form.author.value,

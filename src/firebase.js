@@ -1,7 +1,4 @@
-
 import firebase from "firebase/compat/app";
-
-
 
 export const fireBaseModule = (() => {
   const firebaseConfig = {
@@ -20,8 +17,5 @@ export const fireBaseModule = (() => {
 
   const app = firebase.initializeApp(firebaseConfig);
 
- 
-
-  
-  return {app}
+  return { app };
 })();

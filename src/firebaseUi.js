@@ -38,36 +38,10 @@ export const firebaseUiModule = (() => {
     pubsub.publish("userreSign");
   };
   const handleSignedOutUser = function () {
-    //TODO SIGN IN VE SIGN OUT SONUCUNA GORE STORAGE VE UI GUNCELLENECEK
     firebase.auth().signOut();
-    // deleteAccount();
     pubsub.publish("userSignedOut");
   };
-  /**
-   * TODO
-   * Deletes the user's account.
-   */
-  const deleteAccount = function () {
-    firebase
-      .auth()
-      .currentUser.delete()
-      .catch(function (error) {
-        if (error.code == "auth/requires-recent-login") {
-          // The user's credential is too old. She needs to sign in again.
-          firebase
-            .auth()
-            .signOut()
-            .then(function () {
-              // The timeout allows the message to be displayed after the UI has
-              // changed to the signed out state.
-              setTimeout(function () {
-                alert("Please sign in again to delete your account.");
-              }, 1);
-            });
-        }
-      });
-  };
-
+  
   const initApp = function () {
     document
       .getElementById("header--signout-button")
@@ -76,10 +50,6 @@ export const firebaseUiModule = (() => {
     document
       .getElementById("header--signin-button")
       .addEventListener("click", handleResign);
-    // document.getElementById('delete-account').addEventListener(
-    //     'click', function() {
-    //       deleteAccount();
-    //     });
   };
   window.addEventListener("load", initApp);
 })();

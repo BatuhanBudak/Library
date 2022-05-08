@@ -56,7 +56,7 @@ export const editBookFormModule = (() => {
     if (hasErrors) {
       e.preventDefault();
       hasErrors.focus();
-    }else {
+    } else {
       const cardId = editBookForm.getAttribute("data-id");
       const allCards = document.querySelectorAll(".card");
       const cardToEditId = [...allCards].find((card) => card.id === cardId).id;

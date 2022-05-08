@@ -40,7 +40,7 @@ export const dataManager = (() => {
     id,
   }) => {
     if (!firebase.auth().currentUser) {
-      if(localStorage.getItem("myBooks") === ""){
+      if (localStorage.getItem("myBooks") === "") {
         const newBooks = [
           {
             title: title,
@@ -49,10 +49,10 @@ export const dataManager = (() => {
             readPages: readPages,
             read: read,
             id: id,
-          }
-        ]
+          },
+        ];
         localStorage.setItem("myBooks", JSON.stringify(newBooks));
-      }else{
+      } else {
         const oldBooks = JSON.parse(localStorage.getItem("myBooks"));
         const newBooks = [
           ...oldBooks,
@@ -67,7 +67,6 @@ export const dataManager = (() => {
         ];
         localStorage.setItem("myBooks", JSON.stringify(newBooks));
       }
-     
     } else {
       fireStoreModule.createBookInDb(
         title,
@@ -94,8 +93,6 @@ export const dataManager = (() => {
     if (!firebase.auth().currentUser) {
       const allBooks = JSON.parse(localStorage.getItem("myBooks"));
       const editedBooks = [...allBooks].map((book) => {
-        //TODO 
-        //if read value is true then set the read pages to total pages
         if (book.id === id) {
           return {
             ...book,

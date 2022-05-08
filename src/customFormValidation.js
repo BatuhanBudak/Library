@@ -40,13 +40,6 @@ export const customFormValidation = (() => {
     // If field is required and empty
     if (validity.valueMissing) return "Please fill out this field.";
 
-    // If not the right type
-    // if (validity.typeMismatch) {
-    //   // Number
-    //   if (field.type === "number") return "Please enter a number.";
-
-    // }
-
     if (validity.tooShort)
       return (
         "Please lengthen this text to " +
